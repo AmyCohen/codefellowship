@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign UP</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to CodeFellowship</h1>
+        <h1>Please create a user account</h1>
+    </header>
+
+    <main>
+        <form action="/signup" method="POST">
+        <input name="first-name" placeholder="First Name" type="text"/>
+        <input name="last-name" placeholder="Last Name" type="text"/>
+        <input name="date-of-birth" placeholder="Birth Date" type="date"/> <br/>
+        <input name="username" placeholder="Username" type="text"/>
+        <input name="password" placeholder="Password" type="password"/> <br/>
+        <input name="bio" placeholder="Bio" type="text"/> <br/>
+        <input type="submit"/>
+        </form>
+
+        <p><a href="/userinfo">View Detail Here</a></p>
+    </main>
+
+</body>
+</html>
