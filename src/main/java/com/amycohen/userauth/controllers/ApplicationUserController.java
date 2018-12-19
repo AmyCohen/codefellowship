@@ -3,6 +3,9 @@ package com.amycohen.userauth.controllers;
 import com.amycohen.userauth.model.ApplicationUser;
 import com.amycohen.userauth.repositories.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.ArrayList;
 
 @Controller
 public class ApplicationUserController {
@@ -45,6 +50,12 @@ public class ApplicationUserController {
         ApplicationUser newUser = new ApplicationUser(username, firstname, lastname, password, dateOfBirth, bio);
         appUserRepo.save(newUser);
         System.out.println("New User Added: \n" + newUser);
+
+        // maybe autologin?  FROM Cheatsheet.md
+        Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
         return new RedirectView("/");
     }
 
