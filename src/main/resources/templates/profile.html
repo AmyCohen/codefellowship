@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+
+<h1>Welcome, <span th:text="${user.getFirstName()}">/</span></h1>
+<h2>You are signed in as <span th:text="${user.getUsername()}"></span></h2>
+
+<h3>Your Details:</h3>
+<ul>
+    <li>Username: <span th:text="${user.getUsername()}">/</span></li>
+    <li>Full Name: <span th:text="${user.getFullName()}">/</span></li>
+    <li>Birthdate: <span th:text="${user.getBirthDate()}"></span></li>
+    <li>About You:<span th:text="${user.getBio()}">/</span></li>
+</ul>
+
+</body>
+</html>

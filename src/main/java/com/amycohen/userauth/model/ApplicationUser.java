@@ -1,5 +1,6 @@
 package com.amycohen.userauth.model;
 
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,6 +22,11 @@ public class ApplicationUser implements UserDetails {
     private String firstName;
     private String lastName;
     private String dateOfBirth;
+
+    //Source: http://forums.ohdsi.org/t/specify-transactional-on-jpa-repository-for-operations-involving-lob-fields/370/4
+    //Comment by Chris_Knoll on March 15
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     private String bio;
     private String fullname;
 
@@ -37,10 +43,10 @@ public class ApplicationUser implements UserDetails {
     }
 
     public String toString(){
-        return "User: +" + this.username + "\n" +
-                "Name: +" + this.fullname + "\n" +
+        return "User: " + this.username + "\n" +
+                "Name: " + this.firstName + " " + this.lastName + "\n" +
                 "Birthday: " + this.dateOfBirth + "\n" +
-                "Bio: +" + this.bio;
+                "Bio: " + this.bio;
     }
 
     //Interface methods auto implemented
@@ -63,13 +69,30 @@ public class ApplicationUser implements UserDetails {
         this.fullname = fullName;
     }
 
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName(){
+        return this.lastName;
+    }
+
+    public String getBirthDate(){
+        return this.dateOfBirth;
+    }
+
     @Override
     public String getUsername() {
         return this.username;
     }
 
     public void setUsername(String username) {
-        this.username = username;}
+        this.username = username;
+    }
+
+    public String getBio() {
+        return this.bio;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
